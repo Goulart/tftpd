@@ -1,4 +1,4 @@
-FROM alpine:3.13.4
+FROM alpine:3.14.0
 RUN apk add --no-cache tftp-hpa
 VOLUME /var/tftpboot
 EXPOSE 69/udp
