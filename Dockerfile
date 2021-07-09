@@ -1,7 +1,6 @@
-FROM alpine:3.14.0
-RUN apk add --no-cache tftp-hpa
-VOLUME /var/tftpboot
-EXPOSE 69/udp
-COPY  in.tftpd /etc/conf.d/in.tftpd
-ENTRYPOINT ["in.tftpd"]
-CMD ["-L", "-s", "/var/tftpboot"]
+FROM alpine:3.14
+ENV destdir=/var/tftpboot
+RUN apk update && apk add --no-cache tftp-hpa shadow
+VOLUME $destdir
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
